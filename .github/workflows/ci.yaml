@@ -1,0 +1,34 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test
+
+    runs-on: ubuntu-latest
+
+    timeout-minutes: 15
+
+    strategy:
+      matrix:
+        node-version: [14, 16, 18, 19]
+
+    steps:
+      - uses: actions/checkout@3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Upgrade NPM
+        if: matrix.node-version == 14
+        run: npm i -g npm@latest-7
+      - run: npm ci
+      - run: npm run build
+      - run: npm run test
