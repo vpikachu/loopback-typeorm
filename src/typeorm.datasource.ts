@@ -3,7 +3,7 @@ import {
   CoreBindings,
   inject,
   lifeCycleObserver,
-  LifeCycleObserver
+  LifeCycleObserver,
 } from '@loopback/core';
 import {DataSource, DataSourceOptions} from 'typeorm';
 
@@ -25,7 +25,6 @@ export class TypeOrmDataSource implements LifeCycleObserver {
     @inject(CoreBindings.APPLICATION_INSTANCE) private app: Application,
   ) {}
 
-
   /**
    * This method will be invoked when the application initializes. It will be
    * called at most once for a given application instance.
@@ -39,9 +38,9 @@ export class TypeOrmDataSource implements LifeCycleObserver {
    */
   async start(): Promise<void> {
     const options: DataSourceOptions = await this.app.get(
-      'options.' + this.constructor.name ,
+      'options.' + this.constructor.name,
     );
-    if(!options) throw Error('Connection options undefined.');
+    if (!options) throw Error('Connection options undefined.');
     this.ds = new DataSource(options);
     await this.ds.initialize();
     this.app.bind('datasources.' + this.constructor.name).to(this.ds);
