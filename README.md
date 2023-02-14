@@ -24,10 +24,12 @@ import {TypeOrmDataSource} from 'loopback-typeorm';
 export class MyTypeOrmDataSource extends TypeOrmDataSource {}
 ```
 
-3. Bind TypeORM connection options in you application class:
+If you have created your observer in different file like `src/observers/**.observer.ts`, be sure to manually register the observer in the application instance(https://loopback.io/doc/en/lb4/Life-cycle.html#register-a-life-cycle-observer).
+
+1. Bind TypeORM connection options of your application instance:
 
 ```ts
-//...
+//application.ts file...
 import {MyTypeOrmDataSource} from 'observers/my-typeorm.observer';
 //...
 const myDSOptions: DataSourceOptions = {
@@ -38,9 +40,10 @@ const myDSOptions: DataSourceOptions = {
     //your entites...
   ],
   synchronize: true,
-  logging: false,
+  logging: true,
 };
-app.bind(MyTypeOrmDataSource.getOptionsBindingKey()).to(dsOptions);
+this.bind(MyTypeOrmDataSource.getOptionsBindingKey()).to(myDSOptions);
+//app.bind(MyTypeOrmDataSource.getOptionsBindingKey()).to(myDSOptions);
 //...
 ```
 
@@ -57,6 +60,10 @@ export class MyController {
 ```
 
 5. That's all. Now you are happy to play with TypeORM datasource ;)
+
+## Examples
+
+You can find examples of using this package in the source folder [/examples](https://github.com/vpikachu/loopback-typeorm/tree/main/examples)
 
 ## License
 
