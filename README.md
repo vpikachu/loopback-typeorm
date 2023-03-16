@@ -14,9 +14,9 @@ Also you are required to install database drivers for your datasources. More inf
 
 ## Basic Use
 
-1. Describe your entities. More info: https://typeorm.io/#step-by-step-guide
+Describe your entities. More info: https://typeorm.io/#step-by-step-guide
 
-2. Create observer in `src/observers/my-typeorm.observer.ts`.
+Create observer in `src/observers/my-typeorm.observer.ts`.
 
 ```ts
 import {TypeOrmDataSource} from 'loopback-typeorm';
@@ -26,7 +26,7 @@ export class MyTypeOrmDataSource extends TypeOrmDataSource {}
 
 If you have created your observer in different file like `src/observers/**.observer.ts`, be sure to manually register the observer in the application instance(https://loopback.io/doc/en/lb4/Life-cycle.html#register-a-life-cycle-observer).
 
-1. Bind TypeORM connection options of your application instance:
+Bind TypeORM connection options of your application instance:
 
 ```ts
 //application.ts file...
@@ -42,24 +42,24 @@ const myDSOptions: DataSourceOptions = {
   synchronize: true,
   logging: true,
 };
-this.bind(MyTypeOrmDataSource.getOptionsBindingKey()).to(myDSOptions);
-//app.bind(MyTypeOrmDataSource.getOptionsBindingKey()).to(myDSOptions);
+this.bind(MyTypeOrmDataSource.BK_OPTIONS).to(myDSOptions);
+//app.bind(MyTypeOrmDataSource.BK_OPTIONS).to(myDSOptions);
 //...
 ```
 
-4. Inject TypeORM datasource wherever you need using binding key `MyTypeOrmDataSource.getDSBindingKey()`. Controller example:
+Inject TypeORM datasource wherever you need using binding key `MyTypeOrmDataSource.BK_DATASOURCE`. Controller example:
 
 ```ts
 //...
 export class MyController {
   constructor(
-    @inject(MyTypeOrmDataSource.getDSBindingKey())
+    @inject(MyTypeOrmDataSource.BK_DATASOURCE)
     private myDatasource: DataSource,
   ) {}
 //...
 ```
 
-5. That's all. Now you are happy to play with TypeORM datasource ;)
+That's all. Now you are happy to play with TypeORM datasource ;)
 
 ## Examples
 
