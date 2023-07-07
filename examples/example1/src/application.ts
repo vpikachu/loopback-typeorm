@@ -29,7 +29,7 @@ export class Example1Application extends BootMixin(
       synchronize: true,
       logging: true,
     };
-    this.bind(Example1DataSource.getOptionsBindingKey()).to(myDSOptions);
+    this.bind(Example1DataSource.OPTIONS_KEY).to(myDSOptions);
 
     // Set up the custom sequence
     this.sequence(MySequence);

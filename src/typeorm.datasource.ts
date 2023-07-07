@@ -13,9 +13,27 @@ import {DataSource, DataSourceOptions} from 'typeorm';
  */
 @lifeCycleObserver()
 export class TypeOrmDataSource implements LifeCycleObserver {
+  /**
+   * Datasource binding key
+   */
+  static get DATASOURCE_KEY() {
+    return 'datasources.' + this.name;
+  }
+  /**
+   * Options binding key
+   */
+  static get OPTIONS_KEY() {
+    return 'options.' + this.name;
+  }
+  /**
+   * @deprecated: use TypeOrmDataSource.DATASOURCE_KEY
+   */
   static getDSBindingKey(): string {
     return 'datasources.' + this.name;
   }
+  /**
+   * @deprecated: use TypeOrmDataSource.OPTIONS_KEY
+   */
   static getOptionsBindingKey(): string {
     return 'options.' + this.name;
   }
