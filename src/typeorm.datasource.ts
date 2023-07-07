@@ -16,23 +16,23 @@ export class TypeOrmDataSource implements LifeCycleObserver {
   /**
    * Datasource binding key
    */
-  static get BK_DATASOURCE() {
+  static get DATASOURCE_KEY() {
     return 'datasources.' + this.name;
   }
   /**
    * Options binding key
    */
-  static get BK_OPTIONS() {
+  static get OPTIONS_KEY() {
     return 'options.' + this.name;
   }
   /**
-   * @deprecated: use TypeOrmDataSource.BK_DATASOURCE
+   * @deprecated: use TypeOrmDataSource.DATASOURCE_KEY
    */
   static getDSBindingKey(): string {
     return 'datasources.' + this.name;
   }
   /**
-   * @deprecated: use TypeOrmDataSource.BK_OPTIONS
+   * @deprecated: use TypeOrmDataSource.OPTIONS_KEY
    */
   static getOptionsBindingKey(): string {
     return 'options.' + this.name;

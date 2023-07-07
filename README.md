@@ -1,7 +1,5 @@
 # loopback-typeorm
 
-[![LoopBack](<https://github.com/loopbackio/loopback-next/raw/master/docs/site/imgs/branding/Powered-by-LoopBack-Badge-(blue)-@2x.png>)](http://loopback.io/)
-
 ## Installation
 
 Install packages using `npm`;
@@ -42,18 +40,18 @@ const myDSOptions: DataSourceOptions = {
   synchronize: true,
   logging: true,
 };
-this.bind(MyTypeOrmDataSource.BK_OPTIONS).to(myDSOptions);
-//app.bind(MyTypeOrmDataSource.BK_OPTIONS).to(myDSOptions);
+this.bind(MyTypeOrmDataSource.OPTIONS_KEY).to(myDSOptions);
+//app.bind(MyTypeOrmDataSource.OPTIONS_KEY).to(myDSOptions);
 //...
 ```
 
-Inject TypeORM datasource wherever you need using binding key `MyTypeOrmDataSource.BK_DATASOURCE`. Controller example:
+Inject TypeORM datasource wherever you need using binding key `MyTypeOrmDataSource.DATASOURCE_KEY`. Controller example:
 
 ```ts
 //...
 export class MyController {
   constructor(
-    @inject(MyTypeOrmDataSource.BK_DATASOURCE)
+    @inject(MyTypeOrmDataSource.DATASOURCE_KEY)
     private myDatasource: DataSource,
   ) {}
 //...

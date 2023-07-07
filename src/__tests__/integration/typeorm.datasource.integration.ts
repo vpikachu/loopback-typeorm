@@ -19,18 +19,18 @@ describe('TypeOrmDataSource', () => {
   before('setup application', async () => {
     app = new Application(appConfig);
     app.lifeCycleObserver(TestDataSource);
-    app.bind(TestDataSource.BK_OPTIONS).to(dsOptions);
+    app.bind(TestDataSource.OPTIONS_KEY).to(dsOptions);
     await app.start();
   });
 
   after(async () => {
     await app.stop();
-    const datasource: DataSource = await app.get(TestDataSource.BK_DATASOURCE);
+    const datasource: DataSource = await app.get(TestDataSource.DATASOURCE_KEY);
     expect(datasource.isInitialized).to.false();
   });
 
   it('Type ORM datasource connected', async () => {
-    const datasource: DataSource = await app.get(TestDataSource.BK_DATASOURCE);
+    const datasource: DataSource = await app.get(TestDataSource.DATASOURCE_KEY);
     expect(datasource.isInitialized).to.true();
   });
 });
